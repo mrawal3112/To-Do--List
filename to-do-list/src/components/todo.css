@@ -55,7 +55,6 @@ span:hover {
   padding: 0.5rem;
   display: inline-block;
   width: 55%;
-  border: 2px solid red;
 }
 .taskContainer p {
   margin: 0;

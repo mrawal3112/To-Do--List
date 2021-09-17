@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './todo.css'
 import Tasks from './Tasks';
+
 function CreateTask()
 {
     const[todo,setTodo]=useState([]);
@@ -9,8 +10,11 @@ function CreateTask()
    function addListItem(event){
        setTodoItem(event.target.value)
    }
+   
     function addTaskHandler(event){
+
         event.preventDefault();
+
         if(todoitem.trim().length === 0){
             console.log('No Data To Add')
         }
@@ -19,26 +23,31 @@ function CreateTask()
         }
         setTodoItem('');
     }
+
     function taskStatusHandler(event){
-      return todo.map(items=>{
-          if(event===items.id){
-              return setTodo({...items, complete: !items.complete})
-          }
-          return items;
-      })
+        setTodo(todo.map(items=>{
+            if(event===items.id){
+            return {...items, complete: !items.complete}
+        }
+              return items;
+    }))
     }
-console.log(todo)
-    function deleteTaskHandler(){
-        
+    
+    function deleteTaskHandler(event){
+        setTodo(todo.filter(items=>event!==items.id))
     }
+
     return(
         <React.Fragment>
         <div className='todoForm'>
+
             <form onSubmit={addTaskHandler}>
                 <input type='text'placeholder='Enter Task Here' onChange={addListItem} value={todoitem}></input>
                 <input type='submit'></input>
             </form>
+
         </div>
+
         <div className='todoList'>
         {todo.length === 0 && <p style={{textAlign:'center',fontWeight:'bold',color:'white'}}>No More Pending Tasks For The Day</p>}
         {todo.length > 0 &&(
@@ -52,3 +61,5 @@ console.log(todo)
 }
 
 export default CreateTask
+
+
